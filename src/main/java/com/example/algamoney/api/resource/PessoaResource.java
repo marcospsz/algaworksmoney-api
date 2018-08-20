@@ -3,16 +3,15 @@ package com.example.algamoney.api.resource;
 import com.example.algamoney.api.event.RecursoCriadoEvent;
 import com.example.algamoney.api.model.Pessoa;
 import com.example.algamoney.api.repository.PessoaRepository;
+import com.example.algamoney.api.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +21,9 @@ public class PessoaResource {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private PessoaService pessoaService ;
 
     @Autowired
     ApplicationEventPublisher publisher ;
@@ -56,6 +58,12 @@ public class PessoaResource {
 
     }
 
+    @PutMapping("/{codigo}")
+    public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
 
+        Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
+        return ResponseEntity.ok(pessoaSalva);
+
+    }
 
 }
