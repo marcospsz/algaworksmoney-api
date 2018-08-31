@@ -11,7 +11,6 @@ import java.net.URI;
 @Component
 public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoEvent> {
 
-
     @Override
     public void onApplicationEvent(RecursoCriadoEvent event) {
 
@@ -19,7 +18,6 @@ public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoE
         Long codigo = event.getCodigo() ;
 
         adicionarHeaderLocation(response, codigo);
-
     }
 
     private void adicionarHeaderLocation(HttpServletResponse response, Long codigo) {
