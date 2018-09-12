@@ -2,6 +2,7 @@ package com.example.algamoney.api.resource;
 
 import com.example.algamoney.api.event.RecursoCriadoEvent;
 import com.example.algamoney.api.model.Lancamento;
+import com.example.algamoney.api.repository.filter.LancamentoFilter;
 import com.example.algamoney.api.repository.LancamentoRepository;
 import com.example.algamoney.api.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class LancamentoResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Lancamento>listaLancamentos(){
+    public List<Lancamento>pesquisarLancamentos(LancamentoFilter filter){
 
-        return lancamentoRepository.findAll() ;
+        return lancamentoRepository.filtrar(filter) ;
     }
 
     @PostMapping
